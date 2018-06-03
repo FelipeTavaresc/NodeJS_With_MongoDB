@@ -25,17 +25,65 @@ db.once('open', function() {
   console.log('Everything is okay, mongodb is connected');
 });
 
+var person = mongoose.Schema({
+	name: {
+		firstname : String,
+		lastname  : String
+	}
+});
+
+person.virtual('name.fullName').get(function(){
+	return this.name.firstname.concat(' ').concat(this.name.lastname);
+});
+
+var Person = mongoose.model('Person', person);
+
+Person.create({
+	name: {
+		firstname: 'Felipe',
+		lastname : 'Tavares'
+	}
+}, function(err, person){
+   if (err) {
+   	   console.log('Error person => ', err);
+   	   return;
+   }
+
+   console.log('Person Data => ', person);
+   console.log('Person FullName => ', person.name.fullName);
+});
+
+
 var company = mongoose.Schema({
-	name: String
+	name   : {
+		type: String,
+		required: true
+	},	
+	address:{
+		name  : String,
+		number: Number,
+		city  : String
+	},
+	date: {
+		type   : Date,
+		required: true,
+		default: Date.now
+	}  
 });
 
 var Company = mongoose.model('Company', company)
 
 Company.create({
-	name: 'Company 1'
+	name : 'Company 1',
+	address: {
+		name  : 'Addres 1',
+		number: 765,
+		city  : 'São Paulo'
+	},
+	date: new Date()
 }, function (err, company){
 	if (err) {
-		console.log('error');
+		console.log('Error => ', err);
 		return;
 	}
 
