@@ -19,16 +19,32 @@ router.get('/:id', function(req, res){
             return;
         }
         res.send(person);
-    });
+});
 
     // Person.findOne({
     //     _id: req.params.id
-    // }, function(err, person){
+    // }, function(err, person)
     //     if(err){
     //         return;
     //     }
     //     res.send(person);
     // });
 });
+
+router.post('/', function(req,res){
+    Person.create({
+        name:{
+            firstname: 'Wesley',
+            lastname: 'Willians'
+        },
+        age: 23
+
+    }, function(err, person){
+        if(err){
+            return;
+        }
+        res.send(person);
+    });
+}); 
 
 module.exports = router;
