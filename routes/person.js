@@ -31,20 +31,97 @@ router.get('/:id', function(req, res){
     // });
 });
 
-router.post('/', function(req,res){
-    Person.create({
-        name:{
-            firstname: 'Wesley',
-            lastname: 'Willians'
-        },
-        age: 23
+//router.post('/', function(req,res){
+    // var arr = [{
+    //         name:{
+    //             firstname:'Gabriela 1',
+    //             lastname: 'Ludovino'
+    //         },
+    //         age: 30
+    //     }, {
+    //         name:{
+    //             firstname:'Gabriela 2',
+    //             lastname: 'Ludovino'
+    //         },
+    //         age: 29
+    //     },  {
+    //         name:{
+    //             firstname:'Gabriela 3',
+    //             lastname: 'Ludovino'
+    //         },
+    //         age: 45
+    // }];
 
+    // Person.insertMany(arr, function(err, person){
+    //     if (err) {
+    //         return;
+    //     }
+
+    //     res.send(person);
+    // });
+
+    // var person = new Person({
+    //     name:{
+    //         firstname:'Gabriela',
+    //         lastname: 'Ludovino'
+    //     },
+    //     age: 24
+    // });
+
+    // person.save(person, function(err, person){
+    //     if(err){
+    //         return;
+    //     }
+    //     res.send(person);
+    // });
+
+    // Person.create({
+    //     name:{
+    //         firstname: 'Bernardo',
+    //         lastname: 'Tavares'
+    //     },
+    //     age: 23
+
+    // }, function(err, person){
+    //     if(err){
+    //         return;
+    //     }
+    //     res.send(person);
+    // });
+//}); 
+
+router.put('/:id', function(req, res){
+    Person.findOneAndUpdate({
+        _id: req.params.id
+    }, {
+        name:{
+            firstname: 'TED',
+            lastname: 'Talks'
+        }
     }, function(err, person){
-        if(err){
+        if (err) {
             return;
         }
+
         res.send(person);
+
     });
-}); 
+
+    // Person.update({
+    //     _id: req.params.id
+    // }, {
+    //     name:{
+    //         firstname: 'José',
+    //         lastname: 'Costa'
+    //     }
+    // }, function(err, person){
+    //     if (err) {
+    //         return;
+    //     }
+
+    //     res.send(person);
+
+    // });
+});
 
 module.exports = router;
